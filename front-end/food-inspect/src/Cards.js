@@ -7,7 +7,6 @@ import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Frame1 from "./Frame1.png";
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import MapPage from "./Map"
-import AppPage from "./App"
 
 const mapStyles = {
   //width: '70%',
@@ -78,7 +77,6 @@ const zipCodeStyles = {
         </div>
       </div>
       </div>
-      <Route path = "./" component = {AppPage}></Route>
       <Route path = "./Map" component = {MapPage}></Route>
       </Router>
     );
@@ -86,4 +84,3 @@ const zipCodeStyles = {
 
 
 export default App;
-
