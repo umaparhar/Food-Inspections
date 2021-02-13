@@ -11,6 +11,6 @@ mongoose
 
 
 const filter = {};
-User.find(filter).then( (res) => {
-console.log(res)
+    User.find(filter).then( (res) => {
+    console.log(res)
 })

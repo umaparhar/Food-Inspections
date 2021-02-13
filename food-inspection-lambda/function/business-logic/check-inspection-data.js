@@ -84,7 +84,3 @@ function checkDataAndSendAlerts(){
 // checkDataAndSendAlerts();
 
 exports.checkDataAndSendAlerts = checkDataAndSendAlerts;
-
-
-
-
