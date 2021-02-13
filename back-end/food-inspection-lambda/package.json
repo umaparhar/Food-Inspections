@@ -1,0 +1,21 @@
+{
+  "name": "food-inspection-lambda",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "aws-sdk": "2.631.0",
+    "jest": "25.4.0",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "@sendgrid/mail": "^7.4.2",
+    "aws-xray-sdk-core": "1.1.2",
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0",
+    "mongoose": "^5.11.16",
+    "soda-js": "^0.2.3"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
