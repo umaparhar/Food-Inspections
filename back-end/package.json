@@ -18,7 +18,8 @@
     "express-session": "^1.15.6",
     "http": "0.0.1-security",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.7.5",
+    "soda-js": "^0.2.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"

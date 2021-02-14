@@ -4,11 +4,6 @@ const sgMail = require('@sendgrid/mail');
 const soda = require('soda-js');
 const getUserData = require('./get-user-data');
 
-// TODO: add logic to city based query
-// TODO: get alerts by specific restaurants for their zip code
-// TODO: add more info to emails: risk level, etc
-// TODO: add SMS phone alert
-
 function sendEmail(locationNames, subscriberInfo){
   const apiKey = process.env.SENDGRID_API_KEY;
 
