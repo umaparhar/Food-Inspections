@@ -2,19 +2,16 @@ const express = require('express');
 const router = express.Router();
 // Load User model
 const User = require('../models/User');
-const addSubscriber = require('./helper')
+const addSubscriber = require('./helper');
 
 /**
-Data needs to be structured like this
-
-{ email : whatever@company.com, phone: '123-456-7891}
-
-**/
-
-
-
+ * 
+ * Endpoint is https://deductive-tempo-196321.uc.r.appspot.com
+ * data sent needs to be structured {'name': 'Carlos Avalos', 'email': 'avaloscarlos900dsds@gmail.com', 'zip':'96036','city' : 'Chicago'}
+ */
 router.post('/subscribe', function(req, res){
-  res.json(addSubscriber(req.body.email,req.body.phone,req.body.zip,req.body.city));
+  console.log(req.body);
+  addSubscriber(req.body.name,req.body.email,req.body.phone,req.body.zip,req.body.city,res);
 })
   
 
