@@ -5,7 +5,7 @@ const User = require('../models/User');
 const addSubscriber = require('./helper')
 
 /**
-Data needs to be structured something similar to this
+Data needs to be structured like this
 
 { email : whatever@company.com, phone: '123-456-7891}
 
