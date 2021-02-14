@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import {Button, Alert, Breadcrumb, Card, InputGroup} from 'react-bootstrap'
+import { Button, Alert, Breadcrumb, Card, InputGroup } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Frame1 from "./Frame1.png";
-import {Route, BrowserRouter as Router} from "react-router-dom";
-import MapPage from "./Map"
-import AppPage from "./App"
+import { Route, BrowserRouter, Link } from "react-router-dom";
+import MapPage from "./Map";
+import CardP from "./Cards";
 
 const mapStyles = {
   //width: '70%',
@@ -60,30 +60,44 @@ const zipCodeStyles = {
   borderradius: '50px',
 }
 
-  function App() {
-    return (
-      <Router>
-      <div style = {homeStyles}>
-      <div style = {h1Styles}>
-        <div>
-          <br></br>
-          <form>
-            <input style = {zipCodeStyles} type="text" name = 'zipCode' placeholder = 'Enter Zipcode'>
-            </input>
-          </form>
-          <br></br>
-        </div>
-        <div className = 'frame1' style = {Frame1Styles}>
-          <img src = {Frame1} ></img>
-        </div>
-      </div>
-      </div>
-      <Route path = "./" component = {AppPage}></Route>
-      <Route path = "./Map" component = {MapPage}></Route>
-      </Router>
-    );
-  }
+function submitZip(){
+  <a href= {MapPage}></a>
+}
+
+var userZip = document.getElementById('zipCode');
+
+function App() {
+  
+  return (
+    <div>
+
+      <BrowserRouter>
+        <Route exact strict path="/">
+          <div style={homeStyles}>
+            <div style={h1Styles}>
+              <div>
+                <br></br>
+                <form>
+                  <input style={zipCodeStyles} type="text" id='zipCode' placeholder='Enter Zipcode'>
+                  </input>
+                </form>
+                <br></br>
+                <a href = '/Cards'><Button>Submit</Button></a>
+              </div>
+              <div className='frame1' style={Frame1Styles}>
+                <img src={Frame1} ></img>
+              </div>
+            </div>
+          </div>
+        </Route>
+        <Route path="/Map" component={MapPage} />
+        <Route path="/Cards" component = {CardP} />
+      </BrowserRouter>
+    </div>
+  );
+}
 
 
 export default App;
+
 

@@ -90,12 +90,12 @@ export class MapContainer extends Component {
       <div style = {h1Styles}>
         <h1>Food Inspection</h1>
         <div>
-          <p>Enter a ZipCode</p>
+          <h2 id = 'zip'></h2>
         </div>
         <div className = 'frame1' style = {Frame1Styles}>
           <img src = {Frame1} ></img>
         </div>
-      </div>
+      </div>     
       </Map>
     );
   }

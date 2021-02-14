@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import {Button, Alert, Breadcrumb, Card, InputGroup} from 'react-bootstrap'
+import { Button, Alert, Breadcrumb, Card, InputGroup } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import Frame1 from "./Frame1.png";
-import {Route, BrowserRouter as Router} from "react-router-dom";
-import MapPage from "./Map"
+import { Route, BrowserRouter, Link } from "react-router-dom";
+import MapPage from "./Map";
 
 const mapStyles = {
   //width: '70%',
@@ -59,28 +59,34 @@ const zipCodeStyles = {
   borderradius: '50px',
 }
 
-  function App() {
-    return (
-      <Router>
-      <div style = {homeStyles}>
-      <div style = {h1Styles}>
-        <div>
-          <br></br>
-          <form>
-            <input style = {zipCodeStyles} type="text" name = 'zipCode' placeholder = 'Enter Zipcode'>
-            </input>
-          </form>
-          <br></br>
-        </div>
-        <div className = 'frame1' style = {Frame1Styles}>
-          <img src = {Frame1} ></img>
-        </div>
-      </div>
-      </div>
-      <Route path = "./Map" component = {MapPage}></Route>
-      </Router>
-    );
-  }
+function CardPage() {
+  
+  return (
+    <div>
+
+      <BrowserRouter>
+          <div style={homeStyles}>
+            <div style={h1Styles}>
+              <div>
+                <br></br>
+                <form>
+                  <input style={zipCodeStyles} type="text" id='zipCode' placeholder='Enter Zipcode'>
+                  </input>
+                </form>
+                <br></br>
+                <a href = '/Map'><Button>Submit</Button></a>
+              </div>
+              <div className='frame1' style={Frame1Styles}>
+                <img src={Frame1} ></img>
+              </div>
+            </div>
+          </div>
+        <Route path="/Map" component={MapPage} />
+      </BrowserRouter>
+    </div>
+  );
+}
 
 
-export default App;
+export default CardPage;
+
