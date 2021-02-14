@@ -8,7 +8,16 @@ const UserSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: false
+  },
+  zip:{
+    type: Number,
+    required: false
+  },
+  city:{
+    type: String,
+    required: false
   }
+
 });
 
 
