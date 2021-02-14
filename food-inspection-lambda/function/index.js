@@ -7,12 +7,12 @@ const lambda = new AWS.Lambda()
 
 // Handler
 exports.handler = async function(event, context) {
-  console.log('***hello world***')
+  console.log('***Executing Lambda***')
   console.log('## ENVIRONMENT VARIABLES: ' + serialize(process.env))
   console.log('## CONTEXT: ' + serialize(context))
   console.log('## EVENT: ' + serialize(event))
 
-  alert.checkDataAndSendAlerts()
+  alert.checkDBAndSendAlerts()
   
   return getAccountSettings()
 }

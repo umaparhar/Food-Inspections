@@ -10,7 +10,38 @@ mongoose
   .catch(err => console.log(err));
 
 
-const filter = {};
-    User.find(filter).then( (res) => {
-    console.log(res)
-})
+function getUserEmails(checkDataAndSendAlerts){
+
+  const filter = {};
+
+  User.find(filter).then( (data) => {
+
+    // for each user search by zip code & send email
+    // pass in send alert function & call it here
+    
+    checkDataAndSendAlerts(data);
+    
+
+  })
+
+}
+
+exports.getUserEmails = getUserEmails;
+
+
+// data.forEach( (userInfo) => {
+//   const subscriberInfo = {
+//     email: null,
+//     phone: null
+//   }
+
+//   const email = userInfo.email;
+//   if(email.includes("@")){
+//     subscriberInfo.email = email
+//   }
+
+  
+
+//   userEmails.push(email);
+    
+// })

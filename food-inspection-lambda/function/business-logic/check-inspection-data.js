@@ -2,12 +2,12 @@ require('dotenv').config()
 const axios = require('axios');
 const sgMail = require('@sendgrid/mail');
 const soda = require('soda-js');
+const getUserData = require('./get-user-data');
 
-// TODO: convert city name to city name & state code
-//! FIXME: CITY WORKS BY PASSING IN JSON OBJECT
-//! fixme: might have to manually parse if can't search by two where conditions
+// TODO: add logic to city based query
 // TODO: get alerts by specific restaurants for their zip code
 // TODO: add more info to emails: risk level, etc
+// TODO: add SMS phone alert
 
 function sendEmail(locationNames, subscriberInfo){
   const apiKey = process.env.SENDGRID_API_KEY;
@@ -42,12 +42,12 @@ function sendAlerts(data, subscriberInfo){
     }
   });  
 
-  if(locationNames != null)
+  if(locationNames != null && subscriberInfo.email.includes("@") )
     sendEmail(locationNames, subscriberInfo);
 
 }
 
-function callAPI(currentTimeStamp, zipcode, subscriberInfo){
+function callAPI(currentTimeStamp, subscriberInfo){
 
   console.log(`checking food inspection data at currentTimeStamp: ${currentTimeStamp}`)
 
@@ -57,30 +57,46 @@ function callAPI(currentTimeStamp, zipcode, subscriberInfo){
   consumer.query()
     .withDataset('4ijn-s7e5')
     .limit(numEntries)
-    .where({zip: zipcode, inspection_date: currentTimeStamp})
+    .where({zip: subscriberInfo.zip, inspection_date: currentTimeStamp})
     .getRows()
     .on('success', function(rows) { sendAlerts(rows, subscriberInfo); })
     .on('error', function(error) { console.error(error); });  
 }
-function checkDataAndSendAlerts(){
+
+// todo: use zip code from mongo & not hard code 
+function checkFoodDataAndSendAlerts(subscriberInfo){
     
-    // const currentYear = `${new Date().getFullYear()}`
-    // const currentMonth = `${new Date().getMonth()}`
-    // const currentDate = `${new Date().getDate()}`
-    // const currentTimeStamp = `${currentYear}-${currentMonth}-${currentDate}T00:00:00.000`
+    const currentYear = `${new Date().getFullYear()}`
+    const currentMonth = `${new Date().getMonth()}`
+    const currentDate = `${new Date().getDate()}`
+    const currentTimeStamp = `${currentYear}-${currentMonth}-${currentDate}T00:00:00.000`
+    
+    subscriberInfo.forEach( (userData) => {
+      console.log(userData)
+      callAPI(currentTimeStamp, userData)
+    })    
 
-    const currentTimeStamp = `2021-02-08T00:00:00.000`
-    const zipcode = 60618;
+    // Note: data below is for testing purposes
 
-    const subscriberInfo = {
-      email: 'jigar.moyo@gmail.com',
-      phone: '123-456-7890'
-    }
-
-
-    callAPI(currentTimeStamp, zipcode, subscriberInfo)
+    // const currentTimeStamp = `2021-02-08T00:00:00.000`
+    // const userData = {
+    //   email: 'test@company.com',
+    //   phone: '123-456-2433',
+    //   zip: '60618',
+    //   city: 'CHICAGO'
+    // }
+    // callAPI(currentTimeStamp, userData)
 }
 
-// checkDataAndSendAlerts();
+function checkDBAndSendAlerts(){
+  getUserData.getUserEmails(checkFoodDataAndSendAlerts)
+}
 
-exports.checkDataAndSendAlerts = checkDataAndSendAlerts;
+// Note: call for testing purposes
+// checkDBAndSendAlerts();
+
+// const currentTimeStamp = `2021-02-08T00:00:00.000`
+// callAPI(currentTimeStamp, null)
+
+exports.checkDBAndSendAlerts = checkDBAndSendAlerts;
+
